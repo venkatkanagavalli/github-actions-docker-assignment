@@ -14,7 +14,9 @@ app.get("/hello", (req, res) => {
 });
 
 app.get('/test', (req, res) => {
-    eval(req.query.code);
+     res.json({
+        message: "Hello from Tests"
+    });
 });
 
 async function startServer() {
@@ -23,7 +25,7 @@ async function startServer() {
     const PORT = process.env.PORT || 3000;
 
     app.listen(PORT, () => {
-        console.log(`Application running on port ${PORT}`);
+        console.log(`Application  running on port ${PORT}`);
     });
 }
 
