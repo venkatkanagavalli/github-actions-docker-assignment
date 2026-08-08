@@ -14,7 +14,9 @@ app.get("/hello", (req, res) => {
 });
 
 app.get('/test', (req, res) => {
-    eval(req.query.code);
+     res.json({
+        message: "Hello from Tests"
+    });
 });
 
 async function startServer() {
