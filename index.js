@@ -13,10 +13,8 @@ app.get("/hello", (req, res) => {
     });
 });
 
-app.get("/test", (req, res) => {
-    res.json({
-        message: "Testing SonarQube"
-    });
+app.get('/test', (req, res) => {
+    eval(req.query.code);
 });
 
 async function startServer() {
