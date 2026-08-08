@@ -1,0 +1,58 @@
+services:
+
+  employee-api:
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: employee-api
+
+    ports:
+      - "3000:3000"
+
+    environment:
+      MONGODB_URI: mongodb://mongodb:27017/EmployeeDB
+      PORT: 3000
+
+    depends_on:
+      - mongodb
+
+
+  mongodb:
+
+    image: mongo:8
+
+    container_name: mongodb
+
+    volumes:
+      - mongodb-data:/data/db
+
+    ports:
+      - "27017:27017"
+
+
+  sonarqube:
+
+    image: sonarqube:lts-community
+
+    container_name: sonarqube
+
+    ports:
+      - "9000:9000"
+
+    volumes:
+      - sonarqube-data:/opt/sonarqube/data
+      - sonarqube-extensions:/opt/sonarqube/extensions
+      - sonarqube-logs:/opt/sonarqube/logs
+
+
+volumes:
+
+  mongodb-data:
+
+  sonarqube-data:
+
+  sonarqube-extensions:
+
+  sonarqube-logs:
