@@ -1,0 +1,30 @@
+name: Docker Build and Push
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+
+  docker-build-push:
+
+    name: Build and Push Docker Image
+
+    runs-on: ubuntu-latest
+
+    environment:
+      name: production
+
+    steps:
+
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Docker Build Tag Push
+        uses: ./.github/actions/docker-build-push
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          image-name: ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-docker-assignment
+          image-tag: ${{ github.sha }}
