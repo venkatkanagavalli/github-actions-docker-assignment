@@ -13,6 +13,12 @@ app.get("/hello", (req, res) => {
     });
 });
 
+app.get("/test", (req, res) => {
+    res.json({
+        message: "Testing SonarQube"
+    });
+});
+
 async function startServer() {
     await connectDB();
 
