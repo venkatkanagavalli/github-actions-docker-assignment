@@ -1,0 +1,33 @@
+name: Pull Request - SonarQube
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  sonarqube:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # -----------------------------------------
+      # Checkout source code
+      # -----------------------------------------
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # -----------------------------------------
+      # Run SonarScanner inside Docker
+      # -----------------------------------------
+      - name: Run SonarQube Scan
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}:/usr/src" \
+            sonarsource/sonar-scanner-cli \
+            -Dsonar.projectKey=github-actions-assignment \
+            -Dsonar.sources=/usr/src \
+            -Dsonar.host.url="${{ vars.SONAR_HOST_URL }}" \
+            -Dsonar.token="${{ secrets.SONAR_TOKEN }}"
